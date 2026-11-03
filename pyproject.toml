@@ -1,0 +1,27 @@
+# Métadonnées du projet
+[project]
+name = "fair-share"
+# Version courante (SemVer : majeur.mineur.correctif)
+version = "0.1.0"
+requires-python = ">=3.11"
+
+# Ruff : linter (analyse statique du style et des erreurs)
+[tool.ruff.lint]
+# Règles activées :
+#   E = erreurs de style PEP 8 (pycodestyle)
+#   F = erreurs logiques (pyflakes : imports inutilisés, variables non définies...)
+#   I = tri et organisation des imports (isort)
+#   B = bugs probables et mauvaises pratiques (flake8-bugbear)
+select = ["E", "F", "I", "B"]
+
+# Mypy : vérificateur de types statique
+[tool.mypy]
+# Active toutes les vérifications strictes (annotations de types obligatoires, pas de Any implicite, etc.)
+strict = true
+
+# Pytest : framework de tests
+[tool.pytest.ini_options]
+# Ajoute la racine du projet au chemin d'import Python, pour que les tests puissent importer le code du projet
+pythonpath = ["."]
+# Dossier(s) où pytest cherche les tests par défaut
+testpaths = ["tests"]
