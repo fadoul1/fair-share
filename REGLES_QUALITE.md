@@ -22,8 +22,7 @@ message = "Ceci est un message vraiment très très long qui dépasse largement 
 
 # ✅ Correct
 message = (
-    "Ceci est un message vraiment très très long "
-    "qui est découpé sur plusieurs lignes"
+    "Ceci est un message vraiment très très long qui est découpé sur plusieurs lignes"
 )
 ```
 
@@ -47,7 +46,8 @@ if est_actif:
 
 ```python
 # ❌ Violation
-if x > 0: print("positif")
+if x > 0:
+    print("positif")
 
 # ✅ Correct
 if x > 0:
@@ -90,7 +90,7 @@ Elles détectent du code qui est probablement faux ou inutile.
 import os
 import sys
 
-print(sys.version)   # « os » n'est jamais utilisé
+print(sys.version)  # « os » n'est jamais utilisé
 
 # ✅ Correct
 import sys
@@ -103,7 +103,8 @@ print(sys.version)
 ```python
 # ❌ Violation
 def afficher():
-    print(prenom)    # « prenom » n'existe nulle part
+    print(prenom)  # « prenom » n'existe nulle part
+
 
 # ✅ Correct
 def afficher(prenom: str) -> None:
@@ -115,8 +116,9 @@ def afficher(prenom: str) -> None:
 ```python
 # ❌ Violation
 def calculer() -> int:
-    resultat = 42    # jamais utilisée
+    resultat = 42  # jamais utilisée
     return 0
+
 
 # ✅ Correct
 def calculer() -> int:
@@ -130,7 +132,8 @@ def calculer() -> int:
 def saluer() -> str:
     return "bonjour"
 
-def saluer() -> str:   # écrase la première définition
+
+def saluer() -> str:  # écrase la première définition
     return "salut"
 ```
 
@@ -174,8 +177,10 @@ def ajouter(element: int, liste: list[int] = []) -> list[int]:
     liste.append(element)
     return liste
 
-ajouter(1)   # [1]
-ajouter(2)   # [1, 2]  ← surprise !
+
+ajouter(1)  # [1]
+ajouter(2)  # [1, 2]  ← surprise !
+
 
 # ✅ Correct
 def ajouter(element: int, liste: list[int] | None = None) -> list[int]:
@@ -240,6 +245,7 @@ Mypy vérifie les **types**. Le mode strict active toutes les vérifications, no
 def additionner(a, b):
     return a + b
 
+
 # ✅ Correct
 def additionner(a: int, b: int) -> int:
     return a + b
@@ -249,12 +255,14 @@ def additionner(a: int, b: int) -> int:
 
 ```python
 # ❌ Violation
-age: int = "vingt"           # une chaîne n'est pas un entier
+age: int = "vingt"  # une chaîne n'est pas un entier
+
 
 def doubler(n: int) -> int:
     return n * 2
 
-doubler("5")                 # attend un int, reçoit un str
+
+doubler("5")  # attend un int, reçoit un str
 
 # ✅ Correct
 age: int = 20
@@ -266,7 +274,8 @@ doubler(5)
 ```python
 # ❌ Violation
 def longueur(texte: str | None) -> int:
-    return len(texte)        # texte peut être None
+    return len(texte)  # texte peut être None
+
 
 # ✅ Correct
 def longueur(texte: str | None) -> int:
@@ -279,8 +288,9 @@ def longueur(texte: str | None) -> int:
 
 ```python
 # ❌ Violation
-def premier(elements: list) -> int:   # list de quoi ?
+def premier(elements: list) -> int:  # list de quoi ?
     return elements[0]
+
 
 # ✅ Correct
 def premier(elements: list[int]) -> int:
@@ -293,8 +303,10 @@ def premier(elements: list[int]) -> int:
 # ❌ Violation
 import json
 
+
 def lire(contenu: str) -> int:
-    return json.loads(contenu)   # json.loads renvoie Any
+    return json.loads(contenu)  # json.loads renvoie Any
+
 
 # ✅ Correct
 def lire(contenu: str) -> int:
@@ -307,7 +319,8 @@ def lire(contenu: str) -> int:
 ```python
 # ❌ Violation
 def nom() -> str:
-    return None              # promet un str, renvoie None
+    return None  # promet un str, renvoie None
+
 
 # ✅ Correct
 def nom() -> str | None:
